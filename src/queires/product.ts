@@ -14,7 +14,7 @@ export const ALL_PRODUCTS = gql`query {
         }
     }
 }`
-export const PRODUCT = (_id: number) => gql`query {
+export const PRODUCT = (_id: number | string) => gql`query {
     product(id: ${_id}) {
         id
         title
@@ -189,27 +189,34 @@ export const USER_LENT = gql`query {
 }
 `
 
-export const CREATE_RENT_ITEM = gql`
-  mutation CreateRentItem($userId: Int!, $productId: Int!, $quantity: Int!, $startDate: DateTime!, $endDate: DateTime!) {
-    createRentItem(userId: $userId, productId: $productId, quantity: $quantity, startDate: $startDate, endDate: $endDate) {
-      id
-      quantity
-      startDate
-      endDate
-      product {
+export const CREATE_ORDER = gql`mutation CreateOrder($productId: ID!, $quantity: Int!){
+    createOrderItem(productId: $productId, quantity: $quantity) {
         id
-        title
-        description
-        price
-        rent
-      }
-      user {
-        id
-        email
-        name
-      }
+        quantity
     }
-  }
+}`
+
+export const CREATE_RENT_ITEM = gql`
+    mutation CreateRentItem($productId: ID!, $quantity: Int!, $startDate: DateTime!, $endDate: DateTime!) {
+        createRentItem(productId: $productId, quantity: $quantity, startDate: $startDate, endDate: $endDate) {
+            id
+            quantity
+            startDate
+            endDate
+            product {
+                id
+                title
+                description
+                price
+                rent
+            }
+            user {
+                id
+                email
+                name
+            }
+        }
+    }
 `;
 
 export const DELETE_RENT_ITEM = gql`

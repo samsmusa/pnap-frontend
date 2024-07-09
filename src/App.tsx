@@ -4,7 +4,6 @@ import {
     Routes,
     useNavigate
 } from 'react-router-dom';
-import AllProducts from './pages/AllProducts';
 import Buy from './pages/Buy';
 import {Dashboard as PageDashboard} from './pages/Dashboard';
 import {HiChartPie, HiViewBoards} from "react-icons/hi"
@@ -15,6 +14,7 @@ import MyProducts from "./components/MyProducts.tsx";
 import {Login} from "./components/Login.tsx";
 import SignUp from "./components/SignUp.tsx";
 import MainNav from "./components/MainNav.tsx";
+import HomePage from "./pages/HomePage.tsx";
 
 export default function App() {
     return (
@@ -22,7 +22,7 @@ export default function App() {
             <AuthProvider>
                 <Routes>
                     <Route path="/" element={<Layout/>}>
-                        <Route index element={<AllProducts/>}/>
+                        <Route index element={<HomePage/>}/>
                         <Route path="/product/:productId" element={<Buy/>}/>
                     </Route>
                     <Route path="/dashboard"

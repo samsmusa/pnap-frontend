@@ -14,7 +14,7 @@ interface AddProductFormProps {
 
 const AddProductForm: React.FC<AddProductFormProps> = ({onSave}) => {
     const {data: categ} = useQuery(CATEGORIES);
-    const [AddProduct, {data}] = useMutation(CREATE_PRODUCT, {
+    const [AddProduct] = useMutation(CREATE_PRODUCT, {
         onCompleted: () => {
             onSave();
         }

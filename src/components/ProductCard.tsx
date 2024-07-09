@@ -1,18 +1,11 @@
 // src/components/ProductCard.tsx
-import React, {MouseEventHandler, ReactNode} from 'react';
-import {Card, Button} from 'flowbite-react';
+import React, {ReactNode} from 'react';
+import {Card, Kbd} from 'flowbite-react';
+import {Category, Product} from "../interfaces/interface.ts";
 
-interface Product {
-    id: number;
-    title: string;
-    description: string;
-    category: string;
-    price: string;
-    rentPerHour: string;
-}
 
 interface ICard {
-    onClick?: (MouseEventHandler) => void;
+    onClick?: () => void;
     product: Product;
     children?: ReactNode;
 }
@@ -24,7 +17,8 @@ const ProductCard: React.FC<ICard> = ({product, onClick, children}) => {
             <div className="flex justify-between items-center mb-2">
                 <h3 className="text-lg font-semibold">{product.title}</h3>
             </div>
-            <p className="text-gray-700">Category: {product.category}</p>
+            <p className="text-gray-700 font-semibold text-sm mb-1">{product?.categories?.map((cat: Category) =>
+                <Kbd key={cat.id} className="mr-0.5">{cat?.name}</Kbd>)}</p>
             <p className="text-gray-700">Price: {product.price}</p>
             <p className="text-gray-700">Description: {product.description}</p>
             {children}
